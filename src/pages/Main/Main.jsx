@@ -15,7 +15,7 @@ export const Main = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [categories, setCategories] = useState([]);
   const [selectCategory, setSelectCategory] = useState("All");
-  const [keywords, setKeyWords] = useState("1");
+  const [keywords, setKeyWords] = useState("");
   const totalPages = 10;
   const pageSize = 10;
 
