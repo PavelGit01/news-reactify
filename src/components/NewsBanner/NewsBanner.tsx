@@ -1,9 +1,13 @@
-import React from "react";
 import { formatTimeAgo } from "../../helpers/formatTimeAgo";
 import styles from "./styles.module.css";
 import { Image } from "../Image/Image";
+import { INews } from "../../interfaces";
 
-const NewsBanner = ({ item }) => {
+interface Props {
+  item: INews;
+}
+
+const NewsBanner = ({ item }: Props) => {
   if (!item) {
     return <h3>По вашему запросу ничего не найдено :{"("}</h3>;
   }
@@ -17,7 +21,5 @@ const NewsBanner = ({ item }) => {
     </div>
   );
 };
-
-
 
 export default NewsBanner;
