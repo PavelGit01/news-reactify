@@ -1,11 +1,17 @@
-import React from "react";
+import { DirectionType, SkeletonType } from "../../interfaces";
 import styles from "./styles.module.css";
+
+interface Props {
+  count?: number;
+  type?: SkeletonType;
+  direction?: DirectionType;
+}
 
 export const Skeleton = ({
   count = 1,
   type = "banner",
   direction = "column",
-}) => {
+}: Props) => {
   return (
     <>
       {count > 1 ? (

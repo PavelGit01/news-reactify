@@ -1,7 +1,10 @@
-import React from "react";
 import styles from "./styles.module.css";
 
-export const Image = ({ image }) => {
+interface Props {
+  image: string;
+}
+
+export const Image = ({ image }: Props) => {
   return (
     <div className={styles.wrapper}>
       {image && <img src={image} alt="News" className={styles.image} />}

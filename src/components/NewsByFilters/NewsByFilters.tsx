@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./styles.module.css";
 import NewsList from "../NewsList/NewsList";
 import { PAGE_SIZE, TOTAL_PAGES } from "../../constant/constant";
@@ -8,9 +7,10 @@ import { useDebounce } from "../../helpers/hooks/useDebounce";
 import { useFetch } from "../../helpers/hooks/useFetch";
 import { getNews } from "../../api/apiNews";
 import { PaginationWrapper } from "../PaginationWrapper/PaginationWrapper";
+import { NewsApiResponse, ParamsType } from "../../interfaces";
 
 export const NewsByFilters = () => {
-  const [filter, changeFilter] = useFilters({
+  const { filter, changeFilter } = useFilters({
     page_number: 1,
     page_size: PAGE_SIZE,
     category: null,
@@ -19,7 +19,7 @@ export const NewsByFilters = () => {
 
   const debouncedKeyWords = useDebounce(filter.keywords, 1500);
 
-  const { data, isLoading, error } = useFetch(getNews, {
+  const { data, isLoading } = useFetch<NewsApiResponse, ParamsType>(getNews, {
     ...filter,
     keywords: debouncedKeyWords,
   });
@@ -36,7 +36,7 @@ export const NewsByFilters = () => {
     }
   };
 
-  const handlePageClick = (pageNumber) => {
+  const handlePageClick = (pageNumber: number) => {
     changeFilter("page_number", pageNumber);
   };
 
