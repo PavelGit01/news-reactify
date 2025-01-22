@@ -42,7 +42,10 @@ export const NewsByFilters = () => {
 
   return (
     <section className={styles.section}>
-      <NewsFilters filter={filter} changeFilter={changeFilter} />
+      <NewsFilters
+        filter={filter}
+        changeFilter={changeFilter}
+      />
 
       <PaginationWrapper
         top={true}
