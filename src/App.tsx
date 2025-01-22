@@ -1,9 +1,12 @@
+import { useAppSelector } from "./store";
 import { Header } from "./components/Header/Header";
 import { useTheme } from "./context/ThemeContext";
 import { Main } from "./pages/Main/Main";
 
 function App() {
   const { isDark } = useTheme();
+  const news = useAppSelector((state) => state.news.news);
+  console.log(news);
   return (
     <div className={`app ${isDark ? "dark" : "light"}`}>
       <Header />
