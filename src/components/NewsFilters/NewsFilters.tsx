@@ -1,20 +1,20 @@
 import styles from "./styles.module.css";
 import { Categories } from "../Categories/Categories";
 import { Search } from "../Search/Search";
-import { getCategories } from "../../api/apiNews";
-import { useFetch } from "../../helpers/hooks/useFetch";
 import { Slider } from "../Slider/Slider";
-import { CategoriesApiResponse, IFilters } from "../../interfaces";
+import { IFilters } from "../../interfaces";
+import { useGetCategoryQuery } from "../../store/services/newsApi";
+import { useAppDispatch } from "../../store";
+import { setFilters } from "../../store/slices/newsSlice";
 
 interface Props {
   filter: IFilters;
-  changeFilter: (key: string, value: string | number | null) => void;
 }
 
-export const NewsFilters = ({ filter, changeFilter }: Props) => {
-  const { data: dataCategories } = useFetch<CategoriesApiResponse, null>(
-    getCategories
-  );
+export const NewsFilters = ({ filter }: Props) => {
+  const { data: dataCategories } = useGetCategoryQuery(null);
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.filters}>
@@ -23,7 +23,7 @@ export const NewsFilters = ({ filter, changeFilter }: Props) => {
           <Categories
             categories={dataCategories.categories}
             setSelectedCategory={(category) =>
-              changeFilter("category", category)
+              dispatch(setFilters({ key: "category", value: category }))
             }
             selectCategory={filter.category}
           />
@@ -32,7 +32,9 @@ export const NewsFilters = ({ filter, changeFilter }: Props) => {
 
       <Search
         keywords={filter.keywords}
-        setKeyWords={(keywords) => changeFilter("keywords", keywords)}
+        setKeyWords={(keywords) =>
+          dispatch(setFilters({ key: "keywords", value: keywords }))
+        }
       />
     </div>
   );
