@@ -3,17 +3,16 @@ import { Categories } from "@/feautures/category/ui/Categories/Categories";
 import { Search } from "@/feautures/search/ui/Search/Search";
 import { IFilters } from "@/shared/interfaces";
 import styles from "./styles.module.css";
-import { useGetCategoryQuery } from "@/entities/category/api/categoryApi";
 import { setFilters } from "@/entities/news/model/newsSlice";
 import { Slider } from "@/feautures/slider";
+import { CategoryType } from "@/entities/category";
 
 interface Props {
   filter: IFilters;
+  dataCategories: CategoryType[];
 }
 
-export const NewsFilters = ({ filter }: Props) => {
-  const { data: dataCategories } = useGetCategoryQuery(null);
-
+export const NewsFilters = ({ filter, dataCategories }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -21,7 +20,7 @@ export const NewsFilters = ({ filter }: Props) => {
       {dataCategories && (
         <Slider>
           <Categories
-            categories={dataCategories.categories}
+            categories={dataCategories}
             setSelectedCategory={(category) =>
               dispatch(setFilters({ key: "category", value: category }))
             }
