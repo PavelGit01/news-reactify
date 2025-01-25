@@ -4,14 +4,21 @@ import NewsList from "@/widgets/news/ui/NewsList/NewsList";
 import { IFilters } from "@/shared/interfaces";
 import { INews } from "@/entities/news";
 import { usePaginationNews } from "../../utils/hooks/usePaginationNews";
+import { ReactNode } from "react";
 
 interface Props {
   filters: IFilters;
   news: INews[];
   isLoading: boolean;
+  viewNewsSlot?: (news: INews) => ReactNode;
 }
 
-export const NewsListWithPagination = ({ filters, news, isLoading }: Props) => {
+export const NewsListWithPagination = ({
+  filters,
+  news,
+  isLoading,
+  viewNewsSlot,
+}: Props) => {
   const { handleNextPage, handlePreviousPage, handlePageClick } =
     usePaginationNews(filters);
 
@@ -26,6 +33,7 @@ export const NewsListWithPagination = ({ filters, news, isLoading }: Props) => {
       currentPage={filters.page_number}
     >
       <NewsList
+        viewNewsSlot={viewNewsSlot}
         isLoading={isLoading}
         news={news}
         type="item"

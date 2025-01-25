@@ -1,14 +1,15 @@
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
 import { createRoot } from "react-dom/client";
 import { store } from "./appStore";
-import BaseLayout from "./layouts/BaseLayout";
 import { NewsProvider } from "./providers/NewsProvider";
-import '@/shared/index.css'
+import "@/shared/index.css";
+import { RouterProvider } from "react-router-dom";
+import { appRouter } from "./appRouter";
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
     <NewsProvider store={store}>
-      <BaseLayout />
+      <RouterProvider router={appRouter} />
     </NewsProvider>
   </ThemeProvider>
 );
